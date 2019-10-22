@@ -1,7 +1,8 @@
 # Modify the previous program such that only the users Alice and Bob are greeted by their names
 
-name = raw_input("What is your name?")
+name = input("What is your name?")
 
-if (name=="Bob") or (name=="Alice")
+if (name =="Bob") or (name=="Alice"):
 	print("Hello %s, How are you?" %(name))
-else print("Hello peasant!")
+else: 
+	print("Hello peasant!")
