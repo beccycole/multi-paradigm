@@ -24,6 +24,11 @@ struct Order {
 	int index;
 };
 
+struct Orders {
+	struct Order orders[50];
+	int index;
+};
+
 struct Shop {
 	double cash;
 	struct ProductStock stock[20];
@@ -40,6 +45,12 @@ struct Customer {
 void printProduct(struct Product p)
 {
 	printf("PRODUCT NAME: %s \nPRODUCT PRICE: %.2f\n", p.name, p.price);
+	printf("-------------\n");
+}
+
+void printItemOrder(struct ItemOrder i)
+{
+	printf("PRODUCT NAME: %s \nPRODUCT QUANTITY: %d\n", i.name, i.quantity);
 	printf("-------------\n");
 }
 
@@ -114,6 +125,7 @@ struct Order readOrder(char* fileName){
         exit(EXIT_FAILURE);
 	
 	struct Order order;
+	order.index = 0;
 	
 	//read everyline
 	while ((read = getline(&line, &len, fp)) != -1) {
@@ -141,11 +153,10 @@ struct Order readOrder(char* fileName){
 
 			int quantity = atoi(q);
 			//ItemOrder.quantity = quantity;
-			printf("Prouct Name: %s Quantity: %d \n",name, quantity);
+			//printf("Prouct Name: %s Quantity: %d \n",name, quantity);
 
-			//struct ItemOrder ItemOrder = { name, quantity };
-			//Order.ItemOrder[Order.index++] = ItemOrder;
-
+			struct ItemOrder itemOrder = { name, quantity };
+			order.items[order.index++] = itemOrder;
 			
 			
 		}
@@ -160,6 +171,39 @@ struct Order readOrder(char* fileName){
 	return order;
 }
 
+void printOrder(struct Order order){
+	printf("Name: %s\n", order.name);
+	printf("Budget: %.2f\n", order.budget);
+	printf("Products\n");
+	for (int i = 0; i < order.index; i++)
+	{
+		printItemOrder(order.items[i]);
+	}
+
+}
+
+void reduceBudget(struct Orders allorders, char *name, double budget){
+
+}
+
+void increaseCashShop(struct Shop shop, double cash ){
+
+}
+
+void reduceStock(struct Shop shop, struct ItemOrder item){
+
+}
+
+int checkQuantity(struct Shop shop, struct ItemOrder item){
+
+}
+
+int findProduct(struct Shop shop, struct ItemOrder item ){
+
+}
+
+
+
 int main(void) 
 {
 	// struct Customer dominic = { "Dominic", 100.0 };
@@ -171,7 +215,7 @@ int main(void)
 	// struct ProductStock cokeStock = { coke, 20 };
 	// struct ProductStock breadStock = { bread, 2 };
 	//9
-	// dominic.shoppingList[dominic.index++] = cokeStock;
+	// dominic9.shoppingList[dominic.index++] = cokeStock;
 	// dominic.shoppingList[dominic.index++] = breadStock;
 	//
 	// printCustomer(dominic);
@@ -179,8 +223,15 @@ int main(void)
 	struct Shop shop = createAndStockShop();
 	printShop(shop);
 
-	struct Order myOrder = readOrder("orders.csv");
-	printf("Name: %s Budget: %.2f", myOrder.name, myOrder.budget);
+	struct Orders allOrders;
+	allOrders.orders[0] = readOrder("orders.csv");
+	allOrders.index++;
+	allOrders.orders[1] = readOrder("orders-rebecca.csv");
+	allOrders.index++;
+	//printf("Name: %s Budget: %.2f", myOrder.name, myOrder.budget);
+	printOrder(allOrders.orders[0]);
+	//reduceBudget(allOrders, "Rebecca", 30)
+
 	//readOrder("orders-antonio.csv");
 
 	
