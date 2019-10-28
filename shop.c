@@ -106,11 +106,11 @@ void printShop(struct Shop s)
 	printf("Shop has %.2f in cash\n", s.cash);
 	for (int i = 0; i < s.index; i++)
 	{
-		printProduct(s.stock[i].product);
+		struct Product product = s.stock[i].product;
+		printProduct(product);
 		printf("The shop has %d of the above\n", s.stock[i].quantity);
 	}
 }
-
 
 struct Order readOrder(char* fileName){
 	// open csv file
@@ -144,7 +144,7 @@ struct Order readOrder(char* fileName){
 			order.budget = budget;
 
 		}else {
-			//store ItemsOrders - this is where I have changed code from.
+			//store ItemsOrders 
 			char *n = strtok(line,",");
 			char *name = malloc(sizeof(char) * 50);
 			strcpy(name, n);
@@ -164,9 +164,7 @@ struct Order readOrder(char* fileName){
 		numberLine++;
     }
 
-	//store every line in the our structs
 
-	//calculations
 
 	return order;
 }
@@ -202,6 +200,19 @@ int findProduct(struct Shop shop, struct ItemOrder item ){
 
 }
 
+double findProductPrice(struct Shop s, char *n)
+{
+	for(int i = 0; i < s.index; i++)
+	{
+		struct Product product = s.stock[i].product;
+		char *name = product.name;
+		if(strcmp(name, n) == 0)
+		{
+			return product.price;
+		}
+	}
+	return -1;
+}
 
 
 int main(void) 
@@ -232,7 +243,8 @@ int main(void)
 	printOrder(allOrders.orders[0]);
 	//reduceBudget(allOrders, "Rebecca", 30)
 
-	//readOrder("orders-antonio.csv");
+	double price = findProductPrice(shop, "Coke Can");
+	printf("%.2f\n", price);
 
 	
 // printf("The shop has %d of the product %s\n", cokeStock.quantity, cokeStock.product.name);
