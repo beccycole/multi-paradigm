@@ -2,7 +2,7 @@
 
 # define a function
 def product(n):
-    # if length of the array is equal to 1 return that number
+    # if length of the array is equal to 1 return that number - base case to stop the recursion
     if len(n) == 1:
         return n[0]
     # else return the first element in the array multiplied by the element in position 1 in the array - repeat 

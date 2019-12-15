@@ -6,7 +6,7 @@ new_string = ''
 # define a function
 def replace_char(my_string, old_char, new_char):
   global new_string
-  # if my_string has no characters return newString
+  # if my_string has no characters return newString - base case to stop the recursion
   if my_string == '':
       return new_string
   # else if my_string equal to old_char

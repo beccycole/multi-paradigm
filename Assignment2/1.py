@@ -2,7 +2,7 @@
 
 # define a function
 def sum(n):
-    # if length of the array is equal to 1 number return that number
+    # if length of the array is equal to 1 number return that number - base case to stop the recursion
     if len(n)==1:
         return n[0]
     # else return the first element in the array plus call the function on the rest of the array

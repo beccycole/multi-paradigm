@@ -2,7 +2,7 @@
 
 # define a function
 def remove_even(n):
-  # if no numbers are passed in return an empty list
+  # if no numbers are passed in return an empty list - base case to stop the recursion
   if not n: 
     return []
   # if when the number in the list is divided by 2 there is a remainder of 1 pop on the 
